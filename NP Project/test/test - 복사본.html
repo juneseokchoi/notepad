@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <style>
+        /* 필요한 CSS 스타일링을 추가합니다. */
+        .editable {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>게시판</h1>
+    <ul>
+        {% for post in posts %}
+        <li>
+            <h2>{{ post['title'] }}</h2>
+            <p class="editable" contenteditable="true" data-post-id="{{ post['id'] }}" onblur="updatePost(this)">{{ post['content'] }}</p>
+            <p>작성자: {{ post['author'] }}</p>
+            <p>작성일: {{ post['date'] }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('write') }}">글 작성하기</a>
+
+    <script>
+        // 글 내용 수정 함수
+        function updatePost(element) {
+            const postId = element.getAttribute('data-post-id');
+            const updatedContent = element.innerText.trim();
+
+            // AJAX를 사용하여 서버로 수정된 내용 전송
+            axios.post('/edit_post', {
+                post_id: postId,
+                updated_content: updatedContent
+            })
+            .then(function(response) {
+                console.log(response.data);
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+
+</html>

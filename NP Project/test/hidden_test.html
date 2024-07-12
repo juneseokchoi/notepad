@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /*top_bar*/
+        #top_bar {
+            background-color: #D5D5D5;
+            margin: 0px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #top_bar .left-menu,
+        #top_bar .right-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        #top_bar li {
+            display: inline-block;
+            padding: 5px 15px 5px 15px;
+        }
+
+        .title {
+            width: 1000px;
+            margin: auto;
+        }
+
+        /*content*/
+        .entire-list {
+            list-style: none;
+        }
+
+        .content {
+            width: 1000px;
+            margin: auto;
+            border: green solid;
+        }
+
+        .status {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: blue;
+            border: none;
+            display: inline-block;
+        }
+
+        /*content-head*/
+        .content-head {
+            border: black solid;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer; /* Add cursor pointer */
+        }
+
+        .content-head-title {
+            margin-left: 5px;
+        }
+
+        .button-group {
+            display: flex;
+        }
+
+        .content-head input[type="button"] {
+            float: right;
+            margin: 5px;
+        }
+
+        /*content-body*/
+        .content-body {
+            border: red solid;
+            margin: 15px;
+            display: none; /* Initially hide content body */
+        }
+
+        .content-detail {
+            border: paleturquoise solid;
+        }
+
+        textarea {
+            resize: none;
+            width: 95%;
+            height: 150px;
+            margin: 5px 2% 5px 2%;
+        }
+
+        #plus {
+            text-align: center;
+            width: 1000px;
+            margin: auto;
+        }
+
+        .add-content-status input[type="text"] {
+            height: 25px;
+            width: 800px;
+            margin-left: 2%;
+        }
+
+        .entire-list li {
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+
+<body style="margin: 0;">
+    <!--top bar-->
+    <ul id="top_bar">
+        <div class="left-menu">
+            <input type="text">
+            <input type="button" value="검색">
+            {% for chapter in contents %}
+            <li>
+                {{chapter['name']}}
+            </li>
+            {% endfor %}
+        </div>
+        <div class="right-menu">
+            <input type="button" value="저장">
+        </div>
+    </ul>
+
+    <!--content -->
+    <ul class="entire-list">
+        <!--notepad1 -->
+        <!--최종형태-->
+        {% for chapter in contents %}
+        <li class="title">
+            <h1>{{chapter['name']}}</h1>
+        </li>
+        {% for content in chapter['content_file'] %}
+        <li class="content">
+            <div class="content-head">
+                <div class="content-head-title">
+                    <span class="status"></span>
+                    {{content['title']}}
+                </div>
+            </div>
+            <div class="content-body">
+                {{content['body'] | safe}}
+            </div>
+        </li>
+        {% endfor %}
+        <!--content 추가 버튼-->
+        <li id="plus">
+            <input type="button" value="+">
+        </li>
+        {% endfor %}
+
+        <script>
+            // JavaScript를 사용하여 content-head를 클릭했을 때 content-body를 숨기거나 보이기
+            const contentHeads = document.querySelectorAll('.content-head');
+
+            contentHeads.forEach(head => {
+                head.addEventListener('click', function() {
+                    const body = this.nextElementSibling;
+                    if (body.style.display === 'none' || body.style.display === '') {
+                        body.style.display = 'block';
+                    } else {
+                        body.style.display = 'none';
+                    }
+                });
+            });
+
+            // JavaScript를 사용하여 동그라미 색상 변경
+            const circles = document.querySelectorAll('.content > .content-head > .content-head-title > .status');
+            const textInputs = document.querySelectorAll('.content > .content-body[contenteditable]');
+
+            textInputs.forEach((textInput, index) => {
+                textInput.addEventListener('input', function() {
+                    circles[index].style.backgroundColor = 'orange'; // 해당 인덱스의 동그라미를 주황색으로 변경
+                });
+            });
+        </script>
+    </ul>
+</body>
+
+</html>

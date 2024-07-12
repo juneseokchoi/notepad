@@ -1,0 +1,26 @@
+<!--plus 눌렀을 때 나오는 녀석-->
+        <div class="content content-head add-content-status">
+            <form method="POST" action="/create-title/">
+                <input type="text">
+                <input type="button" value="저장">
+                <!--value 스크립트라 실행 안됨 걍 보기 편하게 하려고 한거-->
+                <input type="hidden" name="chapter-title" value="this.parentElement.previousElementSibling.querySelector('h1').innerText">
+            </form>
+        </div>            
+
+
+        <li class="content">
+            <div class="content-head">
+                <span class="content-head-left">
+                    <div class="content-head-title">
+                        <form method="POST" action="/create-title/">
+                            <input type="text">
+                            <div class="button-group">
+                                <input type="button" value="저장">
+                            </div>
+                        </form>
+                        
+                    </div>
+                </span>
+            </div>
+        </li>

@@ -1,0 +1,28 @@
+자식 요소가 ID가 없는 경우에도 JavaScript를 사용하여 부모 요소에 접근할 수 있습니다. 일반적으로 DOM에서 요소를 탐색할 때 parentNode을 사용하여 부모 요소에 접근할 수 있습니다. 자식 요소에 ID가 없어도 부모 요소를 탐색하는 것은 가능합니다.
+
+예를 들어, 다음과 같은 구조에서 자식 요소(<p>)에는 ID가 없지만, 부모 요소(<div>)에 접근하는 방법을 보여드리겠습니다:
+
+html
+코드 복사
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accessing Parent Element When Child Has No ID</title>
+</head>
+<body>
+    <div>
+        <p>여기에 부모 요소의 정보가 나타나야 함</p>
+    </div>
+
+    <script>
+        const childElement = document.querySelector('div > p'); // 자식 요소 선택
+        const parentElement = childElement.parentNode;
+
+        console.log("부모 요소의 태그 이름:", parentElement.tagName);
+        console.log("부모 요소의 클래스 이름:", parentElement.className);
+        console.log("부모 요소의 innerHTML:", parentElement.innerHTML);
+    </script>
+</body>
+</html>
+이 예제에서는 querySelector를 사용하여 <div>의 자식으로 있는 <p> 요소를 선택합니다. 그리고 parentNode을 사용하여 선택된 자식 요소의 부모 요소에 접근합니다. 부모 요소의 태그 이름, 클래스 이름, 내용 등을 콘솔에 출력하여 확인할 수 있습니다. 요소에 ID가 없어도 parentNode을 사용하여 부모 요소에 접근하는 것은 가능합니다.

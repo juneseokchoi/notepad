@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /*top_bar*/
+        #top_bar {
+            background-color: #D5D5D5;
+            margin: 0px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+
+        #top_bar li {
+            display: inline-block;
+            padding: 5px 15px 5px 15px;
+        }
+
+        .title {
+            width: 1000px;
+            margin: auto;
+        }
+
+        /*content*/
+        .entire-list {
+            list-style: none;
+        }
+
+        .content {
+            width: 1000px;
+            margin: auto;
+            border: green solid;
+
+        }
+
+        /*content-head*/
+        .status {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: blue;
+            border: none;
+            display: inline-block;
+        }
+
+        .content-head {
+            border: black solid;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+
+        }
+
+        .content-head small {
+            font-size: 10px;
+            color: #555;
+            margin-left: 20px;
+            border: orchid solid;
+        }
+
+        .content-head-title {
+            margin-left: 5px;
+            margin-top: 5px;
+            border: blue solid;
+        }
+
+        .button-group {
+            display: flex;
+            border: purple solid;
+
+        }
+
+        .content-head input[type="submit"] {
+            float: right;
+            margin: 5px;
+        }
+
+        /*content-body*/
+        .content-body {
+            border: red solid;
+            margin: 15px;
+            display: block;
+        }
+
+        .content-detail {
+            border: paleturquoise solid;
+        }
+
+        .plus {
+            text-align: center;
+            width: 1000px;
+            margin: auto;
+        }
+
+        .add-content {
+            border: black solid;
+            height: 45px;
+            width: 1000px;
+            margin: auto;
+        }
+
+        .add-content input[type="text"] {
+            width: 700px;
+            height: 30px;
+            margin: 5px;
+            float: left;
+        }
+
+        .add-content input[type="submit"] {
+            float: right;
+            margin: 10px;
+        }
+
+
+        .entire-list li {
+            margin-bottom: 25px;
+        }
+    </style>
+
+
+
+</head>
+
+<body style="margin: 0;">
+    <!--top bar-->
+    <ul id="top_bar">
+        <div class="left-menu">
+            <input type="text">
+            <input type="button" value="검색">
+            {% for chapter in contents %}
+            <li>
+                {{chapter['name']}}
+            </li>
+            {% endfor %}
+
+        </div>
+
+
+    </ul>
+
+    <!--content -->
+    <ul class="entire-list">
+        <!--notepad1 -->
+        <!--최종형태-->
+        {%for chapter in contents%}
+        <div class="chapters">
+            <li class="title">
+                <h1>{{chapter['name']}}</h1>
+            </li>
+            {%for content in chapter['content_file']%}
+                {{content | safe}}
+            {% endfor %}
+            <!--content 추가 버튼-->
+            <li class="plus">
+                <input type="button" value="+">
+            </li>
+        </div>
+        {% endfor %}
+    </ul>
+    <!--했긴 했는데 인덱스 때문에 좀 애매함 각 content마다 id를 부여해야할듯 여기는 수정해야할듯
+        여기다 id로 잡아야겠다 foreach 보다 더 좋을듯? 확실하고
+        -->
+    <script>
+        const contentHeads = document.querySelectorAll('.content-head');
+        contentHeads.forEach(head => {
+            head.addEventListener('click', function () {
+                const body = this.nextElementSibling;
+                if (body.style.display === 'none' || body.style.display === '') {
+                    body.style.display = 'block';
+                } else {
+                    body.style.display = 'none';
+                }
+            });
+        });
+
+        // 동그라미 색상 변경
+        const circles = document.querySelectorAll('.content > .content-head > .content-head-left > .content-head-title > .status');
+        const textInputs = document.querySelectorAll('.content > .content-body[contenteditable]');
+
+        textInputs.forEach((textInput, index) => {
+            textInput.addEventListener('input', function () {
+                circles[index].style.backgroundColor = 'orange'; // 해당 인덱스의 동그라미를 주황색으로 변경
+            });
+        });
+
+
+        //새로 만든 + 누를때 생기는 addtitle
+        document.addEventListener('DOMContentLoaded', function () {
+            const plusButtons = document.querySelectorAll('.plus input[type="button"]');
+            plusButtons.forEach(plusButton => {
+                plusButton.addEventListener('click', function () {
+                    const newli = document.createElement('li');
+                    newli.className = 'add-content';
+
+                    const newForm = document.createElement('form');
+                    newForm.method = 'POST';
+                    newForm.action = '/create-content/';
+
+                    const newInput = document.createElement('input');
+                    newInput.type = 'text';
+                    newInput.name = 'content-title';
+
+                    const newButton = document.createElement('input');
+                    newButton.type = 'submit';
+                    newButton.value = '저장';
+
+                    const hiddenTitleInput = document.createElement('input');
+                    hiddenTitleInput.type = 'hidden';
+                    hiddenTitleInput.name = 'chapter-title';
+                    hiddenTitleInput.value= this.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
+
+                    newForm.appendChild(newInput);
+                    newForm.appendChild(newButton);
+                    newForm.appendChild(hiddenTitleInput);
+                    newli.appendChild(newForm)
+
+                    // + 버튼 숨기기
+                    this.style.display = 'none';
+                    this.parentNode.insertBefore(newli, this);
+                });
+            });
+        });
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

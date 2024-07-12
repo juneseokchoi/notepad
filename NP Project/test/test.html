@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /*top_bar*/
+        #top_bar {
+            background-color: #D5D5D5;
+            margin: 0px;
+            padding: 5px;
+        }
+
+        #top_bar li {
+            display: inline-block;
+            padding: 5px 15px 5px 15px;
+        }
+
+        .title {
+            width: 1000px;
+            margin: auto;
+        }
+
+        /*content*/
+        .content {
+            width: 1000px;
+            margin: auto;
+            border: green solid;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: blue;
+            border: none;
+            display: inline-block;
+        }
+
+        /*content-head*/
+        .content-head {
+            border: black solid;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .content-head-title {
+            margin-left: 5px;
+        }
+
+        .button-group {
+            display: flex;
+        }
+
+        .content-head input[type="button"] {
+            float: right;
+            margin: 5px;
+        }
+
+        /*content-body*/
+        .content-body {
+            border: red solid;
+        }
+
+        textarea {
+            resize: none;
+            width: 95%;
+            height: 150px;
+            margin: 5px 2% 5px 2%;
+        }
+
+        #plus {
+            text-align: center;
+            width: 1000px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body style="margin: 0;">
+    <!--top bar-->
+    <ul id="top_bar">
+        <input type="text">
+        <input type="button" value="검색">
+        <li><a>예시1</a></li>
+        <li><a>예시2</a></li>
+        <li><a>예시3</a></li>
+        <li><input type="button" value="+"></li>
+    </ul>
+
+    <!--content -->
+    <div class="list">
+        <div class="title">
+            <h1>예시1</h1>
+        </div>
+        <!--notepad1 -->
+        <!--최종형태-->
+        <div class="content" id="content-template">
+            <div class="content-head">
+                <div class="content-head-title">
+                    <div class="status"></div>
+                    test
+                </div>
+                <div class="button-group">
+                    <input type="button" value="삭제">
+                    <input type="button" value="종결">
+                </div>
+            </div>
+            <div class="content-body">
+                <textarea>test1</textarea>
+            </div>
+        </div>
+
+        <div id="plus">
+            <input type="button" value="+" onclick="addContent()">
+        </div>
+    </div>
+
+    <script>
+        function addContent() {
+            const contentTemplate = document.getElementById('content-template');
+            const newContent = contentTemplate.cloneNode(true);
+            newContent.id = ''; // Remove id from the cloned element
+            document.querySelector('.list').insertBefore(newContent, document.getElementById('plus'));
+        }
+    </script>
+</body>
+
+</html>
