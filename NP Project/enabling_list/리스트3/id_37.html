@@ -3,10 +3,10 @@
         <span class="content-head-left">
             <div class="content-head-title">
                 <div class="status"></div>
-                {{content_title}}
+                 리스트3 대장
             </div>
-            <small>#<span class ="id">{{id}}</span></small>
-            <small>modified by {{time}}</small>
+            <small>#<span class ="id">37</span></small>
+            <small>modified by 2024-07-14 14:48:26</small>
         </span>
         <div class="button-group">
             <form method="POST" action="/save/" onsubmit="update_hidden(this)">
@@ -20,7 +20,5 @@
             <input type="submit" value="종결">
         </div>
     </div>
-    <!--safe는 이미지 그대로 불러오기위해서-->
-    <!--이미지가 기본적으로 div태그라 div로 condtent-body를 해서 css가 안까지 적용이 되는듯?-->
-    <div class="content-body" contenteditable="true">{{content_value |safe}}</div>
+    <p class="content-body" contenteditable="true"> 이거지</p>
 </li>

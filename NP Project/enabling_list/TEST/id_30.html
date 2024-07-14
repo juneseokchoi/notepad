@@ -3,16 +3,24 @@
         <span class="content-head-left">
             <div class="content-head-title">
                 <div class="status"></div>
-                ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ
+                 ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ
             </div>
-            <small>#30</small>
-            <small>modified by 2024-07-12 12:59:56</small>
+            <small>#<span class ="id">30</span></small>
+            <small>modified by 2024-07-14 15:46:38</small>
         </span>
         <div class="button-group">
-            <input type="submit" value="저장">
+            <form method="POST" action="/save/" onsubmit="update_hidden(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="submit" value="저장">
+            </form>
             <input type="submit" value="삭제">
             <input type="submit" value="종결">
         </div>
     </div>
-    <p class="content-body" contenteditable="true"> 여기가 content-body value 값들</p>
+    <!--safe는 이미지 그대로 불러오기위해서-->
+    <!--이미지가 기본적으로 div태그라 div로 condtent-body를 해서 css가 안까지 적용이 되는듯?-->
+    <div class="content-body" contenteditable="true"><div>성공</div><div><br></div><div><br></div><div><br></div><div><img src="data:image/png;base64,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" alt=""></div></div>
 </li>

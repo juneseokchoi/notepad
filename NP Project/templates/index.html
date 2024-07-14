@@ -155,7 +155,7 @@
                 <h1>{{chapter['name']}}</h1>
             </li>
             {%for content in chapter['content_file']%}
-                {{content | safe}}
+            {{content | safe}}
             {% endfor %}
             <!--content 추가 버튼-->
             <li class="plus">
@@ -164,10 +164,13 @@
         </div>
         {% endfor %}
     </ul>
-    <!--했긴 했는데 인덱스 때문에 좀 애매함 각 content마다 id를 부여해야할듯 여기는 수정해야할듯
-        여기다 id로 잡아야겠다 foreach 보다 더 좋을듯? 확실하고
-        -->
+
+
     <script>
+
+        //했긴 했는데 인덱스 때문에 좀 애매함 각 content마다 id를 부여해야할듯 여기는 수정해야할듯
+        //여기다 id로 잡아야겠다 foreach 보다 더 좋을듯? 확실하고
+
         const contentHeads = document.querySelectorAll('.content-head');
         contentHeads.forEach(head => {
             head.addEventListener('click', function () {
@@ -214,7 +217,7 @@
                     const hiddenTitleInput = document.createElement('input');
                     hiddenTitleInput.type = 'hidden';
                     hiddenTitleInput.name = 'chapter-title';
-                    hiddenTitleInput.value= this.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
+                    hiddenTitleInput.value = this.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
 
                     newForm.appendChild(newInput);
                     newForm.appendChild(newButton);
@@ -227,20 +230,21 @@
                 });
             });
         });
-
-
-
-
+        
+        //content 저장
+        function update_hidden(form){
+            //id값을 hidden[id]에 넣기
+            form.querySelector('input[name="id"]').value = form.parentElement.parentElement.querySelector('.id').innerText; 
+            
+            //content title[content-title]에 넣기
+            form.querySelector('input[name="content-title"]').value = form.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
+            
+            //chapter title[chapter-title]에 넣기
+            form.querySelector('input[name="chapter"]').value = form.parentElement.parentElement.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
+            
+            //content hidden[content]에 넣기
+            form.querySelector('input[name="content"]').value = form.parentElement.parentElement.nextElementSibling.innerHTML;
+        }
     </script>
-
-
-
-
-
-
-
-
-
 </body>
-
 </html>

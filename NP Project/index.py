@@ -66,7 +66,7 @@ def create_content():
     # 데이터 받기
     title = request.form.get('content-title')
     chapter = request.form.get('chapter-title')
-
+    content_value = ''
     # 시간 초기화
     now = datetime.now()
     time = now.strftime('%Y-%m-%d %H:%M:%S')
@@ -82,7 +82,7 @@ def create_content():
     id_file.close()
 
     # content 양식에 데이터 추가
-    content = render_template('content_struct.html', content_title=title, time=time, id=id)
+    content = render_template('content_struct.html', content_title=title, time=time, id=id, content_value=content_value)
 
     # enabling_list에 추가
     f = open(f'enabling_list/{chapter}/id_{id}.html', 'w', encoding='utf-8')
@@ -91,5 +91,29 @@ def create_content():
     
     return redirect(url_for('index'))
 
+@app.route("/save/", methods=['POST'])
+def save():
+    #데이터 받기
+    #id 초기화
+    id = request.form.get('id')
+
+    #content 초기화
+    content_value = request.form.get('content')
+
+    # 저장시간 초기화
+    now = datetime.now()
+    time = now.strftime('%Y-%m-%d %H:%M:%S')
+
+    #content title 초기화
+    content_title = request.form.get('content-title')
+
+    #chapter title 초기화
+    chapter = request.form.get('chapter')
+
+    #파일 생성  타이틀도 들고와야함...
+    f = open(f'enabling_list/{chapter}/id_{id}.html','w', encoding='utf-8')
+    f.write(render_template('content_struct.html', content_title=content_title, time=time, id=id, content_value=content_value))
+
+    return redirect(url_for('index'))
 
 app.run(port=8000,debug=True)
