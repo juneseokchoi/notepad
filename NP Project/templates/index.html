@@ -230,21 +230,67 @@
                 });
             });
         });
-        
+
         //content 저장
-        function update_hidden(form){
+        function update_hidden(form) {
             //id값을 hidden[id]에 넣기
-            form.querySelector('input[name="id"]').value = form.parentElement.parentElement.querySelector('.id').innerText; 
-            
+            form.querySelector('input[name="id"]').value = form.parentElement.parentElement.querySelector('.id').innerText;
+
             //content title[content-title]에 넣기
             form.querySelector('input[name="content-title"]').value = form.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
-            
+
             //chapter title[chapter-title]에 넣기
             form.querySelector('input[name="chapter"]').value = form.parentElement.parentElement.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
-            
+
             //content hidden[content]에 넣기
             form.querySelector('input[name="content"]').value = form.parentElement.parentElement.nextElementSibling.innerHTML;
+
+            //스크롤 위치 저장
+            saveScrollPosition();
         }
+
+        //ctrl + s 누르면 저장
+        document.addEventListener("keydown", function (e) {
+
+            // Ctrl + S (또는 Command + S on Mac)를 눌렀을 때
+            if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) && e.key === 's') {
+
+                // 기본 동작 방지 (페이지 저장)
+                e.preventDefault();
+
+                // 현재 포커스된 contenteditable div 확인
+                var focusedDiv = document.activeElement;
+
+                // save 버튼 찾기
+                var container = focusedDiv.closest('.content');
+                var saveButton = container.querySelector('.button-group form input[type="submit"][value="저장"]');
+
+                // 버튼 클릭
+                saveButton.click();
+            }
+        });
+
+        //스크롤 유지
+        // 스크롤 위치 저장
+        function saveScrollPosition() {
+            document.cookie = "scrollPosition=" + window.scrollY + "; path=/";
+        }
+
+        // 페이지 로드 시 스크롤 위치 복원
+        window.onload = function () {
+            restoreScrollPosition();
+        };
+
+        // 스크롤 위치 복원
+        function restoreScrollPosition() {
+            const match = document.cookie.match(/scrollPosition=(\d+)/);
+            if (match) {
+                window.scrollTo(0, parseInt(match[1], 10));
+            }
+        }
+
+
     </script>
 </body>
+
 </html>
