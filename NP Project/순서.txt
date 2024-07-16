@@ -1,5 +1,7 @@
-생성
-저장
-삭제
+head 클릭시 display
+메뉴 클릭시 이동
 종결
-content-sturct 손보기
+검색
+status 코드 foreach 말고 부모요소로 접근? 고민중
+pointer 위치 저장? 고민중
+전반적 디자인 손보기

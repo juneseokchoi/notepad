@@ -116,4 +116,18 @@ def save():
 
     return redirect(url_for('index'))
 
+@app.route("/delete/", methods=['POST'])
+def delete():
+    #데이터 받기
+    #id 초기화
+    id = request.form.get('id')
+
+    #chapter title 초기화
+    chapter = request.form.get('chapter')
+    
+    #content 삭제
+    os.remove(f'enabling_list/{chapter}/id_{id}.html')
+
+    return redirect(url_for('index'))
+
 app.run(port=8000,debug=True)

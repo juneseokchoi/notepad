@@ -232,7 +232,7 @@
         });
 
         //content 저장
-        function update_hidden(form) {
+        function save_content(form) {
             //id값을 hidden[id]에 넣기
             form.querySelector('input[name="id"]').value = form.parentElement.parentElement.querySelector('.id').innerText;
 
@@ -244,6 +244,17 @@
 
             //content hidden[content]에 넣기
             form.querySelector('input[name="content"]').value = form.parentElement.parentElement.nextElementSibling.innerHTML;
+
+            //스크롤 위치 저장
+            saveScrollPosition();
+        }
+
+        function delete_content(form) {
+            //id값을 hidden[id]에 넣기
+            form.querySelector('input[name="id"]').value = form.parentElement.parentElement.querySelector('.id').innerText;
+
+            //chapter title[chapter-title]에 넣기
+            form.querySelector('input[name="chapter"]').value = form.parentElement.parentElement.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
 
             //스크롤 위치 저장
             saveScrollPosition();
