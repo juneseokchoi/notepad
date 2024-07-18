@@ -136,13 +136,10 @@
             <input type="button" value="검색">
             {% for chapter in contents %}
             <li>
-                {{chapter['name']}}
+                <a href="#{{chapter['name']}}">{{chapter['name']}}</a>
             </li>
             {% endfor %}
-
         </div>
-
-
     </ul>
 
     <!--content -->
@@ -151,7 +148,7 @@
         <!--최종형태-->
         {%for chapter in contents%}
         <div class="chapters">
-            <li class="title">
+            <li class="title" id="{{chapter['name']}}">
                 <h1>{{chapter['name']}}</h1>
             </li>
             {%for content in chapter['content_file']%}
@@ -167,15 +164,12 @@
 
 
     <script>
-
-        //했긴 했는데 인덱스 때문에 좀 애매함 각 content마다 id를 부여해야할듯 여기는 수정해야할듯
-        //여기다 id로 잡아야겠다 foreach 보다 더 좋을듯? 확실하고
-
+        //content head 클릭시 contentbody 접고 열기
         const contentHeads = document.querySelectorAll('.content-head');
         contentHeads.forEach(head => {
             head.addEventListener('click', function () {
                 const body = this.nextElementSibling;
-                if (body.style.display === 'none' || body.style.display === '') {
+                if (body.style.display === 'none') {
                     body.style.display = 'block';
                 } else {
                     body.style.display = 'none';
@@ -187,49 +181,54 @@
         const circles = document.querySelectorAll('.content > .content-head > .content-head-left > .content-head-title > .status');
         const textInputs = document.querySelectorAll('.content > .content-body[contenteditable]');
 
+        //content-body 내용이 입력중일때
         textInputs.forEach((textInput, index) => {
             textInput.addEventListener('input', function () {
-                circles[index].style.backgroundColor = 'orange'; // 해당 인덱스의 동그라미를 주황색으로 변경
+                // 해당 인덱스의 동그라미를 주황색으로 변경
+                circles[index].style.backgroundColor = 'orange';
+
             });
         });
-
 
         //새로 만든 + 누를때 생기는 addtitle
-        document.addEventListener('DOMContentLoaded', function () {
-            const plusButtons = document.querySelectorAll('.plus input[type="button"]');
-            plusButtons.forEach(plusButton => {
-                plusButton.addEventListener('click', function () {
-                    const newli = document.createElement('li');
-                    newli.className = 'add-content';
+        const plusButtons = document.querySelectorAll('.plus input[type="button"]');
+        plusButtons.forEach(plusButton => {
+            plusButton.addEventListener('click', function () {
+                const newli = document.createElement('li');
+                newli.className = 'add-content';
 
-                    const newForm = document.createElement('form');
-                    newForm.method = 'POST';
-                    newForm.action = '/create-content/';
+                const newForm = document.createElement('form');
+                newForm.method = 'POST';
+                newForm.action = '/create-content/';
 
-                    const newInput = document.createElement('input');
-                    newInput.type = 'text';
-                    newInput.name = 'content-title';
+                const newInput = document.createElement('input');
+                newInput.type = 'text';
+                newInput.name = 'content-title';
 
-                    const newButton = document.createElement('input');
-                    newButton.type = 'submit';
-                    newButton.value = '저장';
+                const newButton = document.createElement('input');
+                newButton.type = 'submit';
+                newButton.value = '저장';
 
-                    const hiddenTitleInput = document.createElement('input');
-                    hiddenTitleInput.type = 'hidden';
-                    hiddenTitleInput.name = 'chapter-title';
-                    hiddenTitleInput.value = this.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
+                const hiddenTitleInput = document.createElement('input');
+                hiddenTitleInput.type = 'hidden';
+                hiddenTitleInput.name = 'chapter-title';
+                hiddenTitleInput.value = this.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
 
-                    newForm.appendChild(newInput);
-                    newForm.appendChild(newButton);
-                    newForm.appendChild(hiddenTitleInput);
-                    newli.appendChild(newForm)
+                newForm.appendChild(newInput);
+                newForm.appendChild(newButton);
+                newForm.appendChild(hiddenTitleInput);
+                newli.appendChild(newForm)
 
-                    // + 버튼 숨기기
-                    this.style.display = 'none';
-                    this.parentNode.insertBefore(newli, this);
-                });
+                // + 버튼 숨기기
+                this.style.display = 'none';
+                this.parentNode.insertBefore(newli, this);
+
+                //스크롤 위치 저장
+               saveScrollPosition();
+
             });
         });
+
 
         //content 저장
         function save_content(form) {
@@ -247,8 +246,10 @@
 
             //스크롤 위치 저장
             saveScrollPosition();
+
         }
 
+        //삭제
         function delete_content(form) {
             //id값을 hidden[id]에 넣기
             form.querySelector('input[name="id"]').value = form.parentElement.parentElement.querySelector('.id').innerText;
@@ -258,6 +259,7 @@
 
             //스크롤 위치 저장
             saveScrollPosition();
+
         }
 
         //ctrl + s 누르면 저장
@@ -287,18 +289,35 @@
             document.cookie = "scrollPosition=" + window.scrollY + "; path=/";
         }
 
-        // 페이지 로드 시 스크롤 위치 복원
+        // 페이지 로드 시 
         window.onload = function () {
+
+            //스크롤 위치 복원
             restoreScrollPosition();
+
+            //circle 빨간색이면 block
+            circles.forEach(circle => {
+                const contentBody = circle.closest('.content-head').nextElementSibling;
+                //circle 요소의 실제 스타일 가져오기
+                const computedStyle = window.getComputedStyle(circle);
+                if (computedStyle.backgroundColor === 'rgb(255, 0, 0)') {
+                    contentBody.style.display = 'none';
+                } else {
+                    contentBody.style.display = 'block';
+                }
+            });
         };
+            
 
         // 스크롤 위치 복원
-        function restoreScrollPosition() {
+      function restoreScrollPosition() {
             const match = document.cookie.match(/scrollPosition=(\d+)/);
             if (match) {
                 window.scrollTo(0, parseInt(match[1], 10));
             }
         }
+
+
 
 
     </script>
