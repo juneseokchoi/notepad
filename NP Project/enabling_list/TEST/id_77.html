@@ -2,12 +2,12 @@
     <div class="content-head">
         <span class="content-head-left">
             <div class="content-head-title">
-                <div class="status" style="background-color: {{mode}};"></div>
-                {{content_title}}
+                <div class="status" style="background-color: blue;"></div>
+                 qwe
             </div>
-            <small>#<span class ="id">{{id}}</span></small>
-            <small>modified by <span class = "modified_time">{{modified_time}}</span></small>
-            <small class="closing_time" style="display: none;">{{closing_time}}</small>
+            <small>#<span class ="id">77</span></small>
+            <small>modified by <span class = "modified_time">2024-07-20 09:19:29</span></small>
+            <small class="closing_time" style="display: none;"></small>
         </span>
         <div class="button-group">
             <form method="POST" action="/save/" onsubmit="save_content(this)">
@@ -35,5 +35,5 @@
     </div>
     <!--safe는 이미지 그대로 불러오기위해서-->
     <!--이미지가 기본적으로 div태그라 div로 condtent-body를 해서 css가 안까지 적용이 되는듯?-->
-    <div class="content-body" contenteditable="true" spellcheck="false">{{content_value |safe}}</div>
+    <div class="content-body" contenteditable="true" spellcheck="false">aaaㅁㄴㅇㅁㄴㅇㅁㅇㅁㄴㅇasdㅁㄴㅇ<div>ㅁㄴㅇㅁㄴㅇ</div><div>ㅁㄴㅇ</div><div>ㅁㄴㅇ</div><div>ㅁㄴㅁ</div><div>ㄴㅇ</div><div><br></div></div>
 </li>

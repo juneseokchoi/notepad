@@ -238,10 +238,10 @@
             //content title[content-title]에 넣기
             form.querySelector('input[name="content-title"]').value = form.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
 
-            //chapter title[chapter-title]에 넣기
+            //chapter title[chapter]에 넣기
             form.querySelector('input[name="chapter"]').value = form.parentElement.parentElement.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
 
-            //content hidden[content]에 넣기
+            //content [content]에 넣기
             form.querySelector('input[name="content"]').value = form.parentElement.parentElement.nextElementSibling.innerHTML;
 
             //스크롤 위치 저장
@@ -249,7 +249,36 @@
 
         }
 
-        //삭제
+        //content 종결
+        function close_content(form){
+            //id값을 hidden[id]에 넣기
+            form.querySelector('input[name="id"]').value = form.parentElement.parentElement.querySelector('.id').innerText;
+
+            //content title[content-title]에 넣기
+            form.querySelector('input[name="content-title"]').value = form.parentElement.parentElement.firstElementChild.firstElementChild.innerText;
+
+            //chapter title[chapter]에 넣기
+            form.querySelector('input[name="chapter"]').value = form.parentElement.parentElement.parentElement.parentElement.firstElementChild.querySelector('h1').innerText;
+
+            //content [content]에 넣기
+            form.querySelector('input[name="content"]').value = form.parentElement.parentElement.nextElementSibling.innerHTML;
+
+            //content closing_time [closing_time]에 넣기
+            form.querySelector('input[name="closing_time"]').value = form.parentElement.parentElement.querySelector('.closing_time').innerText;
+
+            //content modified_time [modified_time]에 넣기
+            form.querySelector('input[name="modified_time"]').value = form.parentElement.parentElement.querySelector('.modified_time').innerText;
+
+            //스크롤 위치 저장
+            saveScrollPosition();
+
+            // status 빨간색으로 하는 거 근데 이게 빨간색이 유지가 안되네.. 파이썬으로 종결할때 빨갛게 해야겠다. 짜피 종결할때말고 빨간색 안바꿈
+            form.parentElement.parentElement.querySelector('.status').style.backgroundColor = 'red';
+
+
+        }
+
+        //content 삭제
         function delete_content(form) {
             //id값을 hidden[id]에 넣기
             form.querySelector('input[name="id"]').value = form.parentElement.parentElement.querySelector('.id').innerText;
@@ -298,8 +327,10 @@
             //circle 빨간색이면 block
             circles.forEach(circle => {
                 const contentBody = circle.closest('.content-head').nextElementSibling;
+
                 //circle 요소의 실제 스타일 가져오기
                 const computedStyle = window.getComputedStyle(circle);
+
                 if (computedStyle.backgroundColor === 'rgb(255, 0, 0)') {
                     contentBody.style.display = 'none';
                 } else {
