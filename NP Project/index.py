@@ -21,7 +21,7 @@ NP project
 
 app= Flask(__name__)
 
-#파일 경로 설정
+#파일 절대 경로 설정
 enabling_list_path = os.path.join(os.getcwd(), 'enabling_list')
 closing_list_path = os.path.join(os.getcwd(), 'closing_list')
 
@@ -49,6 +49,7 @@ def show_screen(path):
         
         #{name : chapter_name1, content_file[file1, file2]} 추가
         contents.append(chapter)
+
     return contents
 
 def move_old_files(src_dir_path, dst_dir_path):
@@ -86,7 +87,6 @@ def move_old_files(src_dir_path, dst_dir_path):
 
 @app.route('/')
 def index():
-    #내가 볼때 여기에 종결 3일 뒤 파일 위치 옮기게 해야함
     src_dir_path = enabling_list_path
     dst_dir_path = closing_list_path
     '''혹시몰라 놔둠
@@ -105,23 +105,22 @@ def index():
     '''
         
 
-    #enabling_list에 있는 폴더만 closing_list로 복사하기
+    #enabling_list에 있는 폴더에서 종결된거만 closing_list로 이동하기
     for root, dirs, files in os.walk(src_dir_path):
 
-        # 현재 디렉터리의 상대 경로를 구합니다
+        # enabling_list의 상대경로 구하기
         rel_path = os.path.relpath(root, src_dir_path)
 
-        # 새로운 위치에 복사할 디렉터리 경로를 만듭니다
+        # 목적지 위치 초기화
         dest_path = os.path.join(dst_dir_path, rel_path)
 
-
-        # 해당 디렉터리가 존재하지 않으면 만듭니다
+        # chapter(디렉토리) 없으면 생성
         if not os.path.exists(dest_path):
             os.makedirs(dest_path)
 
+        # 3일 지난거 이동
         move_old_files(root,dest_path)
         
-    #3day_old_content_move(content) 이런식으로
     contents=show_screen(enabling_list_path)
     return render_template('index.html',contents=contents)
 
@@ -132,7 +131,7 @@ def create_chapter():
     return render_template('index.html',chapters=chapters)
 '''
 
-@app.route('/create-content/', methods=['POST'])
+@app.route('/create/', methods=['POST'])
 def create_content():
     # 데이터 받기
     title = request.form.get('content-title')
@@ -242,5 +241,81 @@ def delete():
     os.remove(f'enabling_list/{chapter}/id_{id}.html')
 
     return redirect(url_for('index'))
+
+def file_search(path, target):
+    '''contents : [
+    {name : chapter_name1, content_file : [file1, file2]},
+    {name : chapter_name2, content_file : [file3, file4, file5]}
+    ]
+    '''
+    contents= []
+    
+    return contents
+
+@app.route("/search/", methods=['POST'])
+def search():
+    #데이터 받기
+    #target 초기화
+    target = request.form.get('target')
+
+    # 서칭
+    enabling_contents = []
+    closing_contents = []
+    '''contents : [
+    {name : chapter_name1, content_file : [file1, file2]},
+    {name : chapter_name2, content_file : [file3, file4, file5]}
+    ]
+    '''
+
+    #enabling_list 읽기
+    for chapter_name in os.listdir(enabling_list_path):
+        chapter = {'name': chapter_name, 'content_file': []}
+        chapter_path = os.path.join(enabling_list_path, chapter_name)
+
+        # enabling_list 내 폴더 및 파일 읽기
+        if os.path.isdir(chapter_path):
+            for file_name in os.listdir(chapter_path):
+                if file_name.endswith('.html'):
+                    content_path = os.path.join(chapter_path,file_name)
+
+                    #target 검색
+                    with open(content_path,'r', encoding='utf-8') as f:
+                        file_content = f.read()
+                    if target in file_content:
+                        chapter['content_file'].append(file_content)
+        enabling_contents.append(chapter)
+    
+    #closing_list 읽기
+    for chapter_name in os.listdir(closing_list_path):
+        chapter = {'name': chapter_name, 'content_file': []}
+        chapter_path = os.path.join(closing_list_path, chapter_name)
+
+        # closing_list 내 폴더 및 파일 읽기
+        if os.path.isdir(chapter_path):
+            for file_name in os.listdir(chapter_path):
+                if file_name.endswith('.html'):
+                    content_path = os.path.join(chapter_path,file_name)
+
+                    #target 검색
+                    with open(content_path,'r', encoding='utf-8') as f:
+                        file_content = f.read()
+                    if target in file_content:
+                        chapter['content_file'].append(file_content)
+        closing_contents.append(chapter)
+    
+    #enabling_contents, closing_contents 합체
+    mixed_dict = {}
+
+    for content in enabling_contents + closing_contents:
+        name = content["name"]
+        if name not in mixed_dict:
+            mixed_dict[name] = set(content["content_file"])
+        else:
+            mixed_dict[name].update(content["content_file"])
+
+    # 최종형태로 변환
+    contents = [{"name": name, "content_file": list(files)} for name, files in mixed_dict.items()]
+    
+    return render_template('index.html',contents=contents)
 
 app.run(port=8000,debug=True)

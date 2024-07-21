@@ -132,8 +132,12 @@
     <!--top bar-->
     <ul id="top_bar">
         <div class="left-menu">
-            <input type="text">
-            <input type="button" value="검색">
+            <li>
+            <form method="POST" action="/search/">
+            <input type="text" name="target">
+            <input type="submit" value="검색">
+            </form>
+            </li>
             {% for chapter in contents %}
             <li>
                 <a href="#{{chapter['name']}}">{{chapter['name']}}</a>
@@ -199,7 +203,7 @@
 
                 const newForm = document.createElement('form');
                 newForm.method = 'POST';
-                newForm.action = '/create-content/';
+                newForm.action = '/create/';
 
                 const newInput = document.createElement('input');
                 newInput.type = 'text';
@@ -341,14 +345,19 @@
             
 
         // 스크롤 위치 복원
-      function restoreScrollPosition() {
+        function restoreScrollPosition() {
             const match = document.cookie.match(/scrollPosition=(\d+)/);
             if (match) {
                 window.scrollTo(0, parseInt(match[1], 10));
             }
         }
-
-
+        //F5 키 누르면 홈으로 이동
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'F5') {
+                event.preventDefault(); // 기본 F5 동작을 차단합니다.
+                window.location.href = '/'; // 홈 페이지로 리다이렉트합니다.
+            }
+        });
 
 
     </script>
