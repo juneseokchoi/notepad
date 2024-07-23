@@ -12,6 +12,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;  /*다른 요소들 위에 위치하도록 설정 */
+           
+        }
+
+        input[type="submit"]:hover {
+            background-color:#D5D5D5;
         }
 
 
@@ -19,6 +29,17 @@
         #top_bar li {
             display: inline-block;
             padding: 5px 15px 5px 15px;
+            font-size: 17px;
+            
+        }
+        a {
+            text-decoration : none;
+            color: inherit;
+            
+        }
+        #top_bar a:hover {
+            font-weight: bold;
+            
         }
 
         .title {
@@ -29,19 +50,25 @@
         /*content*/
         .entire-list {
             list-style: none;
+            margin-top: 50px;
         }
 
         .content {
-            width: 1000px;
+            width: 1000px; 
             margin: auto;
-            border: green solid;
-
+            background-color: #EAEAEA;
+            border: black solid;
+            border-radius: 0px 10px ;
+            border-width: 2px;
+            
         }
 
         /*content-head*/
         .status {
             width: 15px;
             height: 15px;
+            margin-left: 15px;
+            margin-top: 15px;
             border-radius: 50%;
             background-color: blue;
             border: none;
@@ -49,55 +76,83 @@
         }
 
         .content-head {
-            border: black solid;
-            height: 45px;
+            border-bottom: black solid;
+            border-width: 1px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            cursor: pointer;
-
+            background-color: white;
+            border-radius: 0px 10px;
         }
 
         .content-head small {
             font-size: 10px;
             color: #555;
-            margin-left: 20px;
-            border: orchid solid;
+            margin-left: 40px;
+            font-weight: 800;
+
         }
 
         .content-head-title {
             margin-left: 5px;
-            margin-top: 5px;
-            border: blue solid;
         }
 
         .button-group {
             display: flex;
-            border: purple solid;
+            margin-right: 20px;
+            
 
         }
 
         .content-head input[type="submit"] {
             float: right;
             margin: 5px;
+            height: 35px;
+            width: 55px;
+            border-width: 1px;
+            border-radius: 20px 20px;
+            font-weight: bold;
+            cursor: pointer;
+        
         }
 
         /*content-body*/
         .content-body {
-            border: red solid;
-            margin: 15px;
+            border: #D5D5D5 solid;
+            background-color: white;
+            border-width: 1px;
+            border-radius: 10px;
+            margin: 20px;
             display: block;
+            
         }
 
         .content-detail {
             border: paleturquoise solid;
         }
 
-        .plus {
+        .plus{
             text-align: center;
             width: 1000px;
             margin: auto;
+            
         }
+        .plus input[type="button"]{
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            height: 33px;
+            width: 33px;
+            border-color: none;
+            background-color: #EAEAEA;
+            
+        }
+
+        input[type="button"]:hover {
+            background-color:#D5D5D5;
+        }
+
+        
 
         .add-content {
             border: black solid;
