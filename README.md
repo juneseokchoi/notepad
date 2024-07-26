@@ -10,6 +10,10 @@ import shutil
 
 import natsort
 
+import threading
+
+import webbrowser
+
 
 
 아래 3개해야함
