@@ -1,0 +1,37 @@
+<li class="content">
+    <div class="content-head">
+        <span class="content-head-left">
+            <div class="content-head-title">
+                <div class="status" style="background-color: blue;"></div>
+                qweqwewqeqweqweqwe
+            </div>
+            <small>      #<span class ="id">110</span></small>
+            <small>modified by <span class = "modified_time">2024-07-26 13:03:21</span></small>
+            <small class="closing_time" style="display: none;"></small>
+        </span>
+        <div class="button-group">
+            <form method="POST" action="/save/" onsubmit="save_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="submit" value="저장">
+            </form>
+            <form method="POST" action="/close/" onsubmit="close_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="hidden" name="modified_time">
+                <input type="hidden" name="closing_time">
+                <input type="submit" value="종결">
+            </form>
+            <form method="POST" action="/delete/" onsubmit="delete_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="submit" value="삭제">
+            </form>
+        </div>
+    </div>
+    <div class="content-body" contenteditable="true" spellcheck="false"></div>
+</li>

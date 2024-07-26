@@ -3,6 +3,7 @@ import os
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 import shutil
+import natsort
 
 '''
 NP project
@@ -40,7 +41,10 @@ def show_screen(path):
 
         # enabling_list 내 폴더 및 파일 읽기
         if os.path.isdir(chapter_path):
-            for file_name in os.listdir(chapter_path):
+            files_name = os.listdir(chapter_path)
+            files_name = natsort.natsorted(files_name)
+            for file_name in files_name:
+                
                 if file_name.endswith('.html'):
                     content_path = os.path.join(chapter_path,file_name)
                     with open(content_path,'r', encoding='utf-8') as f:
@@ -274,7 +278,9 @@ def search():
 
         # enabling_list 내 폴더 및 파일 읽기
         if os.path.isdir(chapter_path):
-            for file_name in os.listdir(chapter_path):
+            enabling_files_name = os.listdir(chapter_path)
+            enabling_files_name = natsort.natsorted(enabling_files_name)
+            for file_name in enabling_files_name:
                 if file_name.endswith('.html'):
                     content_path = os.path.join(chapter_path,file_name)
 
@@ -292,7 +298,9 @@ def search():
 
         # closing_list 내 폴더 및 파일 읽기
         if os.path.isdir(chapter_path):
-            for file_name in os.listdir(chapter_path):
+            closing_files_name = os.listdir(chapter_path)
+            closing_files_name = natsort.natsorted(closing_files_name)
+            for file_name in closing_files_name:
                 if file_name.endswith('.html'):
                     content_path = os.path.join(chapter_path,file_name)
 
