@@ -4,6 +4,8 @@ from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 import shutil
 import natsort
+import threading
+import webbrowser
 
 '''
 NP project
@@ -25,6 +27,12 @@ app= Flask(__name__)
 #파일 절대 경로 설정
 enabling_list_path = os.path.join(os.getcwd(), 'enabling_list')
 closing_list_path = os.path.join(os.getcwd(), 'closing_list')
+
+# 브라우저 자동 오픈
+def open_browser():
+        # 지정된 시간(예: 1초) 후 브라우저를 엽니다.
+        threading.Timer(1, webbrowser.open, args=['http://127.0.0.1:8000']).start()
+
 
 #screen 보여주기
 def show_screen(path):
@@ -326,4 +334,8 @@ def search():
     
     return render_template('index.html',contents=contents)
 
-app.run(port=8000,debug=True)
+
+#메인
+if __name__ == '__main__':
+    open_browser()
+    app.run(port=8000)
