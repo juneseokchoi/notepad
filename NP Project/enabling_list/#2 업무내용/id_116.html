@@ -1,0 +1,37 @@
+<li class="content">
+    <div class="content-head">
+        <span class="content-head-left">
+            <div class="content-head-title">
+                <div class="status" style="background-color: blue;"></div>
+                 주식 공부
+            </div>
+            <small>      #<span class ="id">116</span></small>
+            <small>modified by <span class = "modified_time">2024-08-09 15:35:03</span></small>
+            <small class="closing_time" style="display: none;"></small>
+        </span>
+        <div class="button-group">
+            <form method="POST" action="/save/" onsubmit="save_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="submit" value="저장">
+            </form>
+            <form method="POST" action="/close/" onsubmit="close_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="hidden" name="modified_time">
+                <input type="hidden" name="closing_time">
+                <input type="submit" value="종결">
+            </form>
+            <form method="POST" action="/delete/" onsubmit="delete_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="submit" value="삭제">
+            </form>
+        </div>
+    </div>
+    <div class="content-body" contenteditable="true" spellcheck="false">재무제표를 통한 <b>전분기 대비</b> 비교 결과<div>조선주(hd한국조선해양) : 좋았던 적은 없지만 차트상으로 오르는 구간은 있었다.</div><div>식품주</div><div>(삼양식품) : 좋았던 적은<b> </b>다 차트가 좋았다. 애매했을 때는 보통 중간쯤이 최고점이었다.</div><div>(농심) : 재무제표상으로는 좋으나 증권사의 목표주가 하향으로 주가가 내려가는 경우도 있음. 잘 파악해야할듯</div><div><br></div><div><br></div><div>읽을 책 : 업종별 상장기업 재무제표 하이라이트<br></div><div><br></div><div>1. 좀더 명확한 시장분석 후 기업분석</div><div>2. 해외주식 기업분석</div><div>3. 업종별 공부</div><div>4. 리서치분석</div><div><br></div><div>※갑자기 든 생각인데 자본?, 매출원가, 관리비를 파악하면 매출 및 예상 이익을 파악할 수 있지 않을까?</div><div>&nbsp;자본 대비 유지비용을 파악해서 미래의 매출원가, 관리비를 파악 후 매출을 파악하는 방향..</div><div>근데 매출원가가 먼저가 아니고 매출액이 먼저인거 같다. 매출을 파악할 방법이 있을까... 수주?</div><div><br></div><div>주가가 오른다고 좋은기업이 아니고 좋은 기업은 주가가 오른다.</div><div><br></div><div>현금흐름표도 중요하다. 현금흐름표로 얼마나 투자했는지 현금흐름을 파악하는데 중요하다.</div><div><br></div><div>은행주의 현금흐름과 영업이익의 관계성을 알아보자</div><div>투자활동 현금흐름이 중요한듯??</div></div>
+</li>

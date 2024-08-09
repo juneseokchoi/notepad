@@ -1,0 +1,37 @@
+<li class="content">
+    <div class="content-head">
+        <span class="content-head-left">
+            <div class="content-head-title">
+                <div class="status" style="background-color: blue;"></div>
+                 NP Project
+            </div>
+            <small>      #<span class ="id">117</span></small>
+            <small>modified by <span class = "modified_time">2024-08-06 18:51:25</span></small>
+            <small class="closing_time" style="display: none;"></small>
+        </span>
+        <div class="button-group">
+            <form method="POST" action="/save/" onsubmit="save_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="submit" value="저장">
+            </form>
+            <form method="POST" action="/close/" onsubmit="close_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="hidden" name="modified_time">
+                <input type="hidden" name="closing_time">
+                <input type="submit" value="종결">
+            </form>
+            <form method="POST" action="/delete/" onsubmit="delete_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="submit" value="삭제">
+            </form>
+        </div>
+    </div>
+    <div class="content-body" contenteditable="true" spellcheck="false">1. save 부분과 close 부분에서 새로 파일을 저장하는 것이 아닌 수정이 필요함.<div>2. 검색할때 id 순서가 좀 안맞음</div><div>3. 백업, 복원 기능</div><div>4. 로그인 기능</div></div>
+</li>

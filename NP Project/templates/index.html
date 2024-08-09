@@ -123,6 +123,7 @@
             border-width: 1px;
             border-radius: 10px;
             margin: 20px;
+            padding: 5px;
             display: block;
             
         }
@@ -410,7 +411,9 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'F5') {
                 event.preventDefault(); // 기본 F5 동작을 차단합니다.
+                saveScrollPosition();
                 window.location.href = '/'; // 홈 페이지로 리다이렉트합니다.
+                restoreScrollPosition();
             }
         });
 

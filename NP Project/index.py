@@ -30,8 +30,8 @@ closing_list_path = os.path.join(os.getcwd(), 'closing_list')
 
 # 브라우저 자동 오픈
 def open_browser():
-        # 지정된 시간(예: 1초) 후 브라우저를 엽니다.
-        threading.Timer(1, webbrowser.open, args=['http://127.0.0.1:8000']).start()
+        chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
+        webbrowser.get(chrome_path).open_new('http://127.0.0.1:8000/')
 
 
 #screen 보여주기
@@ -337,5 +337,6 @@ def search():
 
 #메인
 if __name__ == '__main__':
-    open_browser()
+    # 지정된 시간(예: 1초) 후 브라우저를 열기
+    threading.Timer(1, open_browser).start()
     app.run(port=8000)

@@ -1,0 +1,37 @@
+<li class="content">
+    <div class="content-head">
+        <span class="content-head-left">
+            <div class="content-head-title">
+                <div class="status" style="background-color: blue;"></div>
+                 SPP Project
+            </div>
+            <small>      #<span class ="id">118</span></small>
+            <small>modified by <span class = "modified_time">2024-07-31 15:33:40</span></small>
+            <small class="closing_time" style="display: none;"></small>
+        </span>
+        <div class="button-group">
+            <form method="POST" action="/save/" onsubmit="save_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="submit" value="저장">
+            </form>
+            <form method="POST" action="/close/" onsubmit="close_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="hidden" name="modified_time">
+                <input type="hidden" name="closing_time">
+                <input type="submit" value="종결">
+            </form>
+            <form method="POST" action="/delete/" onsubmit="delete_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="submit" value="삭제">
+            </form>
+        </div>
+    </div>
+    <div class="content-body" contenteditable="true" spellcheck="false">재무제표 결과를 파이썬 라이브러리로 빼내올 수는 있으나 AI 학습까지 구현이 될지 모르겠음.<div>일단 지켜봐야함.</div><div>ㄴ 방학동안 못해도 포폴로 쓸만함</div></div>
+</li>

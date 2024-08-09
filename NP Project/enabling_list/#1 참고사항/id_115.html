@@ -1,0 +1,37 @@
+<li class="content">
+    <div class="content-head">
+        <span class="content-head-left">
+            <div class="content-head-title">
+                <div class="status" style="background-color: blue;"></div>
+                 방학 목표
+            </div>
+            <small>      #<span class ="id">115</span></small>
+            <small>modified by <span class = "modified_time">2024-08-09 14:54:31</span></small>
+            <small class="closing_time" style="display: none;"></small>
+        </span>
+        <div class="button-group">
+            <form method="POST" action="/save/" onsubmit="save_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="submit" value="저장">
+            </form>
+            <form method="POST" action="/close/" onsubmit="close_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="hidden" name="content-title">
+                <input type="hidden" name="content">
+                <input type="hidden" name="modified_time">
+                <input type="hidden" name="closing_time">
+                <input type="submit" value="종결">
+            </form>
+            <form method="POST" action="/delete/" onsubmit="delete_content(this)">
+                <input type="hidden" name="id">
+                <input type="hidden" name="chapter">
+                <input type="submit" value="삭제">
+            </form>
+        </div>
+    </div>
+    <div class="content-body" contenteditable="true" spellcheck="false">1. 주식 공부<div>2. NP Project 저장 및 종결 방식 수정</div><div>3. SPP Project</div><div>4. NS Project (뉴스 스크랩) 시스템 구축</div><div>5. 토익 공부</div></div>
+</li>
