@@ -250,7 +250,10 @@ def delete():
     chapter = request.form.get('chapter')
     
     #content 삭제
-    os.remove(f'enabling_list/{chapter}/id_{id}.html')
+    try:
+        os.remove(f'enabling_list/{chapter}/id_{id}.html')
+    except:
+        os.remove(f'closing_list/{chapter}/id_{id}.html')
 
     return redirect(url_for('index'))
 
@@ -291,11 +294,14 @@ def search():
             for file_name in enabling_files_name:
                 if file_name.endswith('.html'):
                     content_path = os.path.join(chapter_path,file_name)
-
                     #target 검색
                     with open(content_path,'r', encoding='utf-8') as f:
                         file_content = f.read()
                     if target in file_content:
+                        # temp 파일로 전송
+        
+
+
                         chapter['content_file'].append(file_content)
         enabling_contents.append(chapter)
     
@@ -316,9 +322,13 @@ def search():
                     with open(content_path,'r', encoding='utf-8') as f:
                         file_content = f.read()
                     if target in file_content:
+                        # temp파일로 전송
                         chapter['content_file'].append(file_content)
         closing_contents.append(chapter)
-    
+    # temp 파일 정렬
+    # temp 파일 읽기
+    # 양식에 맞게 넣기
+
     #enabling_contents, closing_contents 합체
     mixed_dict = {}
 
@@ -328,6 +338,7 @@ def search():
             mixed_dict[name] = set(content["content_file"])
         else:
             mixed_dict[name].update(content["content_file"])
+
 
     # 최종형태로 변환
     contents = [{"name": name, "content_file": list(files)} for name, files in mixed_dict.items()]
@@ -339,4 +350,7 @@ def search():
 if __name__ == '__main__':
     # 지정된 시간(예: 1초) 후 브라우저를 열기
     threading.Timer(1, open_browser).start()
+    #실행시킨 pc만 허용
     app.run(port=8000)
+    #호스트 다 허용
+    #app.run(host='0.0.0.0',port=8000)
