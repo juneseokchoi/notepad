@@ -1,9 +1,0 @@
-{
-    "id": 0,
-    "chapter": "#1 참고사항",
-    "content_title": "NotePad(v1) 참고사항",
-    "content": "<div><b>설명</b><br>0. Notepad로 사진, 글 등을 저장하는 프로그램. content마다 json파일로 저장함.</div><div>1. enabling 파일에 새폴더 생성 시 제목으로 chapter 생성됨(closing 파일은 서버키면 자동으로 생성)</div><div>2. ini파일에서 설정 가능</div><div>3. 종결 누르면 상태가 비활성화 상태가 되고 3일후 안보임. 단, 검색하면 보임</div><div>4. 삭제 누르면 영구삭제</div><div>5. ctrl + s,&nbsp;<b>ctrl + b</b>,&nbsp;<u>ctrl + u</u>,&nbsp;<i>ctrl + i&nbsp;</i>사용가능</div><div><a jsname=\"UWckNb\" href=\"https://namu.wiki/w/%ED%95%98%EC%9D%B4%ED%8D%BC%EB%A7%81%ED%81%AC\" data-ved=\"2ahUKEwiwgLiZ-5eLAxW4dvUHHdnuIKQQFnoECAsQAQ\" ping=\"/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://namu.wiki/w/%25ED%2595%2598%25EC%259D%25B4%25ED%258D%25BC%25EB%25A7%2581%25ED%2581%25AC&amp;ved=2ahUKEwiwgLiZ-5eLAxW4dvUHHdnuIKQQFnoECAsQAQ&amp;sqi=2\"></a></div><div><b><br></b></div><div><b>문제점</b></div><div>1. 보안이 좀 취약함</div>",
-    "mode": "blue",
-    "modified_time": "2025-05-06 13:42:32",
-    "closing_time": ""
-}
