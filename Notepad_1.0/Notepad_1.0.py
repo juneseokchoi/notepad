@@ -12,7 +12,7 @@ NP project
     ㄴ js
         ㄴ script.js
 ㄴ data
-    ㄴ notepad.ini
+    ㄴ Notepad_1.0.ini
 
 ㄴ enabling_list
     ㄴ chapter1
@@ -145,7 +145,7 @@ def create_content():
 
     # conf 읽기
     config = configparser.ConfigParser()
-    with open('data/notepad.ini', 'r', encoding='utf-8') as f:
+    with open('data/Notepad_1.0.ini', 'r', encoding='utf-8') as f:
         config.read_file(f)
     
     # id 읽기
@@ -169,7 +169,7 @@ def create_content():
 
     # last_id 수정
     config['config']['last_id'] = str(last_id)
-    with open('data/notepad.ini', 'w', encoding='utf-8') as configfile:
+    with open('data/Notepad_1.0.ini', 'w', encoding='utf-8') as configfile:
         config.write(configfile)
     
     return redirect(url_for('index'))
