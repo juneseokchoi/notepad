@@ -95,7 +95,7 @@ Notepad_1.0/
 ![image](https://github.com/user-attachments/assets/50372d02-0d39-4848-ba14-ebecb9503d80)
 
 
-  - 종결시 빨간색으로 변환  
+  - 종결시 빨간색으로 변환(3일 후 아예 안보임)  
 ![image](https://github.com/user-attachments/assets/520f93a4-c3c6-4003-ae87-6e0213fe0b28)
 
 
