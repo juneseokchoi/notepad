@@ -35,7 +35,7 @@ NP project
 ㄴ templates
     ㄴ main.html
     ㄴ login.html
-ㄴ index.py
+ㄴ Notepad_1.0.py
 '''
 
 # conf setting
