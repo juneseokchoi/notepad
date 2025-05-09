@@ -40,7 +40,7 @@ NP project
 
 # conf setting
 config = configparser.ConfigParser()
-config.read('data/notepad.ini', encoding='utf-8')
+config.read('data/Notepad_1.0.ini', encoding='utf-8')
 last_id = int(config['config']['last_id'])
 port = int(config['config']['port'])
 password = config['config']['password']
